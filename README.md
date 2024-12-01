@@ -19,7 +19,13 @@ npm run solve 2        # Solve day 2
 ```
 
 3. Create new day (optional script):
+   Assuming that:
+
+1) Your solution code in `src/day1/solution.ts`
+2) Your puzzle input in `inputs/day1.txt`
 
 ```bash
 npm run new-day 3      # Create template for day 3
 ```
+
+will show you both solutions for that day's puzzle.
