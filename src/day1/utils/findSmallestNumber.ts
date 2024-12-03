@@ -11,7 +11,7 @@ export function findSmallestNumber(list: Locations[]): Locations {
   );
 }
 
-export function getDifference(
+export function compareLists(
   leftList: Locations[],
   rightList: Locations[],
   idKey: keyof Locations,

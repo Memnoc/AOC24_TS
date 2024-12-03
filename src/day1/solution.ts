@@ -1,7 +1,6 @@
-import { getDifference } from "./utils/findSmallestNumber";
+import { compareLists } from "./utils/findSmallestNumber";
 import { Locations } from "./types/Locations";
 
-// Parse input function specific to this day's format
 export function parseInput(input: string): {
   leftList: Locations[];
   rightList: Locations[];
@@ -26,10 +25,10 @@ export function parseInput(input: string): {
 // Part 1 solution
 export function part1(input: string): number {
   const { leftList, rightList } = parseInput(input);
-  return getDifference(leftList, rightList, "id", "locationId");
+  return compareLists(leftList, rightList, "id", "locationId");
 }
 
-// Leave part 2 as placeholder for now
+// Part 2 solution
 export function part2(input: string): number {
   return 0;
 }
