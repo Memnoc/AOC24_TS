@@ -1,6 +1,4 @@
-// src/index.ts
 import { readInput } from "./utils/readIinput";
-
 async function runDay(day: string) {
   try {
     const { part1, part2 } = await import(`./day${day}/solution.ts`);

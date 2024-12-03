@@ -9,18 +9,16 @@ export function parseInput(input: string): {
   const rightList: Locations[] = [];
 
   lines.forEach((line, index) => {
-    // Split the line into two numbers
-    const [left, right] = line.split(/\s+/).map(Number);
+    const [left, right] = line.replace(/\s+/g, "").trim().split(" ");
 
-    // Create location objects for each side
     leftList.push({
       id: index,
-      locationId: left,
+      locationId: parseInt(left),
     });
 
     rightList.push({
       id: index,
-      locationId: right,
+      locationId: parseInt(right),
     });
   });
 
