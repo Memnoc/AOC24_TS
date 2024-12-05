@@ -1,4 +1,5 @@
 import { compareLists } from "./utils/findSmallestNumber";
+import { calculateMultipleOccurrences } from "./utils/findSameNumber";
 import { Locations } from "./types/Locations";
 
 export function parseInput(input: string): {
@@ -30,5 +31,6 @@ export function part1(input: string): number {
 
 // Part 2 solution
 export function part2(input: string): number {
-  return 0;
+  const { leftList, rightList } = parseInput(input);
+  return calculateMultipleOccurrences(leftList, rightList);
 }
