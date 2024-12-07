@@ -29,3 +29,17 @@ npm run new-day 3      # Create template for day 3
 ```
 
 will show you both solutions for that day's puzzle.
+
+### TypeScript commands useful for this project
+
+1. Create a tsconfig
+
+```bash
+npx tsc --init
+```
+
+2. Running Typescript with Node
+
+```bash
+npx ts-node file.ts
+```
