@@ -1,6 +1,6 @@
 import { readInput } from "../../utils/readInput";
 import { parseInput } from "./utils/parseInput2";
-import { ReportStatus, SecurityReport } from "./wip/wip-solution-2";
+import { ReportStatus, SecurityReport } from "./types/SecurityReports";
 
 export function findIncreasingOccurrences(
   reports: SecurityReport[],
