@@ -36,10 +36,40 @@ export function part1(input: string): number {
   return findIncreasingOccurrences(reports).length;
 }
 
+function isValidSequence(readings: number[]): boolean {
+  if (readings.length < 2) return true;
+
+  let isIncreasing = true;
+  let isDecreasing = true;
+
+  for (let i = 0; i < readings.length - 1; i++) {
+    const diff = Math.abs(readings[i] - readings[i + 1]);
+    if (diff < 1 || diff > 3) return false;
+
+    if (readings[i] >= readings[i + 1]) isIncreasing = false;
+    if (readings[i] <= readings[i + 1]) isDecreasing = false;
+  }
+
+  return isIncreasing || isDecreasing;
+}
+
 export function part2(input: string): number {
-  // Placeholder for part 2
-  return 0;
+  const reports = parseInput(input);
+  return reports.filter((report) => {
+    // Check if already valid
+    if (isValidSequence(report.readings)) return true;
+
+    // Try removing each number one at a time
+    for (let i = 0; i < report.readings.length; i++) {
+      const modified = [...report.readings];
+      modified.splice(i, 1);
+      if (isValidSequence(modified)) return true;
+    }
+
+    return false;
+  }).length;
 }
 
 const input = readInput(2);
 console.log("Part 1:", part1(input));
+console.log("Part 2:", part2(input));

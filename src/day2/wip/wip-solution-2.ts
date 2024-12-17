@@ -35,6 +35,7 @@ export function findIncreasingOccurrences(
     let isIncreasing = true;
     let isDecreasing = true;
     let isValidDifferences = true;
+    let problemDampener = 0;
 
     console.log(`\nChecking Report ${report.id}:`);
     console.log(`Readings: ${report.readings.join(", ")}`);
@@ -46,8 +47,9 @@ export function findIncreasingOccurrences(
         `Difference between ${report.readings[i]} and ${report.readings[i + 1]} is ${diff}`,
       );
 
-      if (diff < 1 || diff > 3) {
+      if ((diff < 1 || diff > 3) && problemDampener == 1) {
         isValidDifferences = false;
+        problemDampener++;
         console.log("❌ Adjacent difference not between 1-3");
       }
 
@@ -64,6 +66,7 @@ export function findIncreasingOccurrences(
     const isSafe = (isIncreasing || isDecreasing) && isValidDifferences;
     report.status = isSafe ? ReportStatus.SAFE : ReportStatus.UNSAFE;
     console.log(`Result: ${isSafe ? "SAFE ✅" : "UNSAFE ❌"}`);
+    console.log("problemDampener: ", problemDampener);
     return isSafe;
   });
 }
@@ -79,3 +82,32 @@ const reports: SecurityReport[] = [
 ];
 
 console.log(findIncreasingOccurrences(reports).length); // Should output 2
+
+function isValidSequence(readings: number[]): boolean {
+  let isIncreasing = true;
+  let isDecreasing = true;
+
+  for (let i = 0; i < readings.length - 1; i++) {
+    const diff = Math.abs(readings[i] - readings[i + 1]);
+    if (diff < 1 || diff > 3) return false;
+
+    if (readings[i] >= readings[i + 1]) isIncreasing = false;
+    if (readings[i] <= readings[i + 1]) isIncreasing = false;
+  }
+
+  return isIncreasing || isDecreasing;
+}
+
+function checkWithDamper(report: SecurityReport): boolean {
+  // check if it is already valid
+  if (isValidSequence(report.readings)) return true;
+
+  // remove each one at a time
+  for (let i = 0; i < report.readings.length; i++) {
+    const modifiedReadings = [...report.readings];
+    modifiedReadings.splice(i, 1);
+
+    if (isValidSequence(modifiedReadings)) return true;
+  }
+  return false;
+}
