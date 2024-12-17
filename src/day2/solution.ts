@@ -56,10 +56,8 @@ function isValidSequence(readings: number[]): boolean {
 export function part2(input: string): number {
   const reports = parseInput(input);
   return reports.filter((report) => {
-    // Check if already valid
     if (isValidSequence(report.readings)) return true;
 
-    // Try removing each number one at a time
     for (let i = 0; i < report.readings.length; i++) {
       const modified = [...report.readings];
       modified.splice(i, 1);
