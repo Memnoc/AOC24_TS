@@ -1,19 +1,13 @@
-import { Multiplication } from "../types/Multiplications";
+// NOTE: now we need to handle new cases in the input, which are:
+// do()
+// don't()
+// WARN: xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))
+// Considering the new instructions = 48
 
-export function parseInput(input: string): Multiplication[] {
-  return Array.from(input.matchAll(/(?:mul|do_not_mul)\((\d+),(\d+)\)/g)).map(
-    (match) => {
-      const [_, num1, num2] = match;
-      return {
-        num1: Number(num1),
-        num2: Number(num2),
-        result: Number(num1) * Number(num2),
-      };
-    },
-  );
-}
+const input2 =
+  "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
 
-export function parseInput2(input: string): number {
+function calculateSum(input: string): number {
   let isMultEnabled = true;
   let sum = 0;
 
@@ -34,3 +28,5 @@ export function parseInput2(input: string): number {
 
   return sum;
 }
+
+console.log(calculateSum(input2)); // 48 we good
